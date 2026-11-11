@@ -142,3 +142,11 @@ BCA Mini Project
 shree
 # Sag11
 library management system 
+| Column | Description |
+|---|---|
+| issue_id | Primary key |
+| member_id | Foreign key referencing members |
+| book_id | Foreign key referencing books |
+| issue_date | Date when the book was issued |
+| due_date | Expected return date |
+| return_date | Actual return date |
