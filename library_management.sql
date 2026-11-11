@@ -1,226 +1,192 @@
-
--- LIBRARY MANAGEMENT SYSTEM
--- DATABASE CREATION
-
 CREATE DATABASE librarydb;
 USE librarydb;
 
--- 1. MEMBERS TABLE
 CREATE TABLE members (
-    member_id INT PRIMARY KEY AUTO_INCREMENT,
-    member_name VARCHAR(100),
-    member_type VARCHAR(20),
-    joined_date DATE
+    member_id   INT          PRIMARY KEY AUTO_INCREMENT,
+    member_name VARCHAR(100) NOT NULL,
+    member_type VARCHAR(10)  NOT NULL,
+    joined_date DATE         NOT NULL
 );
 
--- 2. BOOKS TABLE
 CREATE TABLE books (
-    book_id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(150),
-    author VARCHAR(100),
-    category VARCHAR(50),
-    price DECIMAL(10,2),
-    copies_available INT
+    book_id          INT          PRIMARY KEY AUTO_INCREMENT,
+    title            VARCHAR(150) NOT NULL,
+    author           VARCHAR(100) NOT NULL,
+    category         VARCHAR(50)  NOT NULL,
+    price            DECIMAL(8,2) NOT NULL,
+    copies_available INT          NOT NULL DEFAULT 1
 );
 
--- 3. ISSUES TABLE
 CREATE TABLE issues (
-    issue_id INT PRIMARY KEY AUTO_INCREMENT,
-    member_id INT,
-    book_id INT,
-    issue_date DATE,
-    due_date DATE,
-    return_date DATE,
+    issue_id    INT  PRIMARY KEY AUTO_INCREMENT,
+    member_id   INT  NOT NULL,
+    book_id     INT  NOT NULL,
+    issue_date  DATE NOT NULL,
+    due_date    DATE NOT NULL,
+    return_date DATE NULL,
     FOREIGN KEY (member_id) REFERENCES members(member_id),
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id)   REFERENCES books(book_id)
 );
 
--- 4. INSERT MEMBERS
-INSERT INTO members
-(member_name, member_type, joined_date)
-VALUES
-('Arun','Student','2025-01-10'),
-('Bhuvana','Student','2025-01-12'),
-('Rahul','Student','2025-02-01'),
-('Priya','Faculty','2025-02-05'),
-('Kiran','Student','2025-02-10'),
-('Sneha','Student','2025-03-01'),
-('Amit','Faculty','2025-03-05'),
-('Divya','Student','2025-03-10'),
-('Ravi','Student','2025-04-01'),
-('Anu','Faculty','2025-04-05'),
-('Manoj','Student','2025-04-10'),
-('Neha','Student','2025-05-01');
 
--- 5. INSERT BOOKS
-INSERT INTO books
-(title, author, category, price, copies_available)
-VALUES
-('Python Basics','John','Programming',450,5),
-('Java Programming','James','Programming',500,4),
-('SQL Guide','Smith','Database',350,3),
-('DBMS Concepts','Ramesh','Database',400,2),
-('Computer Networks','Andrew','Networking',550,3),
-('C Programming','Dennis','Programming',300,4),
-('Mathematics','Ravi','Mathematics',250,2),
-('Science Today','David','Science',200,3),
-('Wings of Fire','APJ Abdul Kalam','Fiction',300,2),
-('Data Science','Tom','Programming',600,4),
-('Operating System','Galvin','Computer Science',500,3),
-('Artificial Intelligence','Russell','AI',700,2),
-('Statistics','Gupta','Mathematics',350,3),
-('Internet Basics','Peter','Networking',250,2),
-('Machine Learning','Tom Mitchell','AI',650,3);
 
--- 6. INSERT ISSUES
-INSERT INTO issues
-(member_id,book_id,issue_date,due_date,return_date)
-VALUES
-(1,1,'2025-01-01','2025-01-15','2025-01-18'),
-(2,2,'2025-01-02','2025-01-16','2025-01-16'),
-(3,3,'2025-01-03','2025-01-17',NULL),
-(4,4,'2025-01-04','2025-02-03','2025-02-05'),
-(5,5,'2025-01-05','2025-01-19','2025-01-19'),
-(6,6,'2025-01-06','2025-01-20','2025-01-22'),
-(7,7,'2025-01-07','2025-02-06',NULL),
-(8,8,'2025-01-08','2025-01-22','2025-01-22'),
-(9,9,'2025-01-09','2025-01-23','2025-01-25'),
-(10,10,'2025-01-10','2025-02-09',NULL),
-(11,11,'2025-01-11','2025-01-25','2025-01-25'),
-(12,12,'2025-01-12','2025-01-26','2025-01-29'),
-(1,2,'2025-02-01','2025-02-15','2025-02-15'),
-(2,3,'2025-02-02','2025-02-16',NULL),
-(3,4,'2025-02-03','2025-02-17','2025-02-20'),
-(4,5,'2025-02-04','2025-03-06','2025-03-06'),
-(5,6,'2025-02-05','2025-02-19','2025-02-19'),
-(6,7,'2025-02-06','2025-02-20',NULL),
-(7,8,'2025-02-07','2025-03-09','2025-03-12'),
-(8,9,'2025-02-08','2025-02-22','2025-02-22'),
-(9,10,'2025-02-09','2025-02-23',NULL),
-(10,11,'2025-02-10','2025-03-12','2025-03-12'),
-(11,12,'2025-02-11','2025-02-25','2025-02-28'),
-(12,13,'2025-02-12','2025-02-26',NULL),
-(1,14,'2025-03-01','2025-03-15','2025-03-15'),
-(2,15,'2025-03-02','2025-03-16','2025-03-18'),
-(3,1,'2025-03-03','2025-03-17',NULL),
-(4,2,'2025-03-04','2025-04-03','2025-04-03'),
-(5,3,'2025-03-05','2025-03-19','2025-03-22'),
-(6,4,'2025-03-06','2025-03-20',NULL),
-(7,5,'2025-03-07','2025-04-06','2025-04-06'),
-(8,6,'2025-03-08','2025-03-22','2025-03-22');
+-- ---------- members (6) ----------
+INSERT INTO members (member_id, member_name, member_type, joined_date) VALUES
+(1,'Aarav Sharma','Student','2025-06-10'),
+(2,'Diya Patel','Student','2025-07-02'),
+(3,'Rohan Mehta','Student','2025-08-15'),
+(4,'Ananya Iyer','Faculty','2026-01-20'),
+(5,'Kabir Singh','Student','2026-03-05'),
+(6,'Meera Nair','Faculty','2026-09-01');
 
--- 7. DISPLAY ALL RECORDS
-SELECT * FROM members;
-SELECT * FROM books;
-SELECT * FROM issues;
+-- ---------- books (10) ----------
+INSERT INTO books (book_id, title, author, category, price, copies_available) VALUES
+( 1,'Database System Concepts','Silberschatz','Computer Science',650,4),
+( 2,'SQL Fundamentals','John Viescas','Computer Science',480,4),
+( 3,'Clean Code','Robert Martin','Computer Science',520,3),
+( 4,'Operating System Concepts','Silberschatz','Computer Science',590,0),
+( 5,'Discrete Mathematics','Kenneth Rosen','Mathematics',410,2),
+( 6,'Linear Algebra','Gilbert Strang','Mathematics',380,2),
+( 7,'Indian History','Romila Thapar','History',300,1),
+( 8,'World War II','Antony Beevor','History',350,0),
+( 9,'Fundamentals of Physics','Halliday','Science',620,2),
+(10,'Organic Chemistry','Paula Bruice','Science',700,0);
 
--- 8. COUNT RECORDS
-SELECT COUNT(*) FROM members;
-SELECT COUNT(*) FROM books;
-SELECT COUNT(*) FROM issues;
+-- ---------- issues (10) ----------
+INSERT INTO issues (issue_id, member_id, book_id, issue_date, due_date, return_date) VALUES
+( 1,1,1,'2026-08-01','2026-08-15','2026-08-20'),  -- late 5
+( 2,5,1,'2026-09-01','2026-09-15','2026-09-20'),  -- late 5
+( 3,3,1,'2026-10-20','2026-11-03',NULL),          -- open, overdue 7
+( 4,4,4,'2026-10-12','2026-10-26',NULL),          -- open, overdue 15
+( 5,2,2,'2026-09-10','2026-09-24','2026-09-30'),  -- late 6
+( 6,1,2,'2026-08-15','2026-08-29','2026-08-29'),  -- on time (boundary)
+( 7,1,7,'2026-09-20','2026-10-04',NULL),          -- open, overdue 37
+( 8,5,8,'2026-11-05','2026-11-19',NULL),          -- open, not due
+( 9,2,5,'2026-11-01','2026-11-15',NULL),          -- open, not due
+(10,4,9,'2026-10-15','2026-10-29','2026-11-02');  -- late 4
 
--- 9. BOOKS IN EACH CATEGORY
-SELECT category, COUNT(*) AS total_books
-FROM books
-GROUP BY category;
+-- Phase 1 — Know your data
 
--- 10. TOP 5 BORROWED BOOKS
-SELECT b.title, COUNT(*) AS borrowed
+-- C2. How many members, books and issue records are there?
+SELECT
+    (select count(*) from members)as MemberCount,
+    (select count(*) from books)  as BooksCount,
+    (select count(*) from issues) as IssuesCount;
+
+-- Phase 2 — Business questions
+
+-- C3. How many titles and total copies are there in each category?
+SELECT category,count(title) as total_titles,sum(copies_available) as total_copies from books group by category;
+
+-- C4. What are the top 5 most borrowed books?
+SELECT b.title, COUNT(i.issue_id) AS times_borrowed
 FROM books b
-JOIN issues i ON b.book_id=i.book_id
-GROUP BY b.book_id,b.title
-ORDER BY borrowed DESC
+INNER JOIN issues i ON b.book_id = i.book_id
+GROUP BY b.book_id, b.title
+ORDER BY times_borrowed DESC
 LIMIT 5;
 
--- 11. MEMBERS WHO NEVER BORROWED
-SELECT m.member_name
+-- C5. Which members have never borrowed a book?
+SELECT m.member_name, m.member_type
 FROM members m
-LEFT JOIN issues i ON m.member_id=i.member_id
+LEFT JOIN issues i ON m.member_id = i.member_id
 WHERE i.issue_id IS NULL;
 
--- 12. CURRENTLY ISSUED BOOKS
-SELECT m.member_name,b.title,i.due_date
+-- C6. Which books are currently issued (not returned)?
+SELECT m.member_name, b.title, i.due_date
 FROM issues i
-JOIN members m ON i.member_id=m.member_id
-JOIN books b ON i.book_id=b.book_id
+INNER JOIN members m ON i.member_id = m.member_id
+INNER JOIN books b ON i.book_id = b.book_id
 WHERE i.return_date IS NULL;
 
--- 13. LATE RETURN FINE (RS.2 PER DAY)
-SELECT issue_id,
-DATEDIFF(return_date,due_date) AS late_days,
-DATEDIFF(return_date,due_date)*2 AS fine
-FROM issues
-WHERE return_date>due_date;
+-- C7. Which books were returned late? Calculate days late and fine.
+SELECT m.member_name, b.title, 
+       DATEDIFF(i.return_date, i.due_date) AS days_late,
+       DATEDIFF(i.return_date, i.due_date) * 2 AS fine
+FROM issues i
+INNER JOIN members m ON i.member_id = m.member_id
+INNER JOIN books b ON i.book_id = b.book_id
+WHERE i.return_date > i.due_date;
 
--- 14. TOTAL FINE PER MEMBER
-SELECT m.member_name,
-SUM(GREATEST(DATEDIFF(i.return_date,i.due_date),0)*2) AS total_fine
+-- C8. What is the total fine per member?
+SELECT m.member_name, 
+       SUM(DATEDIFF(i.return_date, i.due_date) * 2) AS total_fine
+FROM issues i
+INNER JOIN members m ON i.member_id = m.member_id
+WHERE i.return_date > i.due_date
+GROUP BY m.member_id, m.member_name
+HAVING SUM(DATEDIFF(i.return_date, i.due_date) * 2) > 0;
+
+-- C9. Compare Student vs Faculty usage.
+SELECT m.member_type, COUNT(i.issue_id) AS total_borrowed
 FROM members m
-JOIN issues i ON m.member_id=i.member_id
-GROUP BY m.member_id,m.member_name;
+INNER JOIN issues i ON m.member_id = i.member_id
+GROUP BY m.member_type;
 
--- 15. STUDENT AND FACULTY COMPARISON
-SELECT member_type,COUNT(*) AS total_members
-FROM members
-GROUP BY member_type;
-
--- 16. MEMBER RANKING
-SELECT m.member_name,
-COUNT(i.issue_id) AS total_books,
-RANK() OVER(ORDER BY COUNT(i.issue_id) DESC) AS ranking
+-- C10. Rank the members by the number of books they borrowed, using RANK().
+SELECT m.member_name, 
+       COUNT(i.issue_id) AS books_borrowed,
+       RANK() OVER (ORDER BY COUNT(i.issue_id) DESC) AS rank_number
 FROM members m
-LEFT JOIN issues i ON m.member_id=i.member_id
-GROUP BY m.member_id,m.member_name;
+LEFT JOIN issues i ON m.member_id = i.member_id
+GROUP BY m.member_id, m.member_name;
 
--- 17. MOST POPULAR CATEGORY
-SELECT b.category,COUNT(*) AS total_borrowed
-FROM books b
-JOIN issues i ON b.book_id=i.book_id
+-- C11. Which category is the most popular among members?
+SELECT b.category, COUNT(i.issue_id) AS total_issues
+FROM issues i
+INNER JOIN books b ON i.book_id = b.book_id
 GROUP BY b.category
-ORDER BY total_borrowed DESC
-LIMIT 1;
+ORDER BY total_issues DESC;
 
--- 18. BOOKS WITH ZERO AVAILABLE COPIES
-SELECT * FROM books
-WHERE copies_available=0;
+-- C12. Which books have zero copies available and also have pending (not returned) issues? Use a subquery.
+SELECT b.book_id, b.title 
+FROM books b
+WHERE b.copies_available = 0 
+  AND EXISTS (
+      SELECT 1 
+      FROM issues i 
+      WHERE i.book_id = b.book_id 
+        AND i.return_date IS NULL
+  );
 
--- 19. STORED PROCEDURE
+
+-- Phase 3 — Automate
+
+-- C13. Write a stored procedure member_history(member_id).
 DELIMITER //
-
-CREATE PROCEDURE MemberHistory(IN mid INT)
+CREATE PROCEDURE member_history(IN p_member_id INT)
 BEGIN
-    SELECT m.member_name,b.title,
-    i.issue_date,i.due_date,i.return_date
+    SELECT b.title, i.issue_date, i.return_date
     FROM issues i
-    JOIN members m ON i.member_id=m.member_id
-    JOIN books b ON i.book_id=b.book_id
-    WHERE m.member_id=mid;
+    INNER JOIN books b ON i.book_id = b.book_id
+    WHERE i.member_id = p_member_id;
 END //
-
 DELIMITER ;
 
-CALL MemberHistory(1);
+-- Test:
+CALL member_history(1);
 
--- 20. TRIGGER
+-- C14. Create a trigger: when a row is inserted in a copy of the issues table, reduce copies_available by 1.
+-- Make copies of the tables first
+CREATE TABLE books_copy AS SELECT * FROM books;
+CREATE TABLE issues_copy AS SELECT * FROM issues;
+
+-- Create the trigger
 DELIMITER //
-
-CREATE TRIGGER reduce_copies
-AFTER INSERT ON issues
+CREATE TRIGGER trg_issues_insert
+AFTER INSERT ON issues_copy
 FOR EACH ROW
 BEGIN
-    UPDATE books
-    SET copies_available=copies_available-1
-    WHERE book_id=NEW.book_id
-    AND copies_available>0;
+    UPDATE books_copy 
+    SET copies_available = copies_available - 1 
+    WHERE book_id = NEW.book_id;
 END //
-
 DELIMITER ;
 
--- 21. FINAL OUTPUT
-SELECT * FROM members;
-SELECT * FROM books;
-SELECT * FROM issues;
+-- Test: Give Book 6 (which has 2 copies) to member 3
+INSERT INTO issues_copy (issue_id, member_id, book_id, issue_date, due_date, return_date) 
+VALUES (101, 3, 6, '2026-11-10', '2026-11-24', NULL);
 
--- PROJECT CONCLUSION
--- Library Management System manages books,
--- members, issuing records and late return fines.
+
+-- Check the result:
+SELECT book_id, title, copies_available FROM books_copy WHERE book_id = 6;
