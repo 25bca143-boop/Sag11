@@ -1,116 +1,51 @@
 
 # Library Management System
 
-## Project Overview
-The Library Management System is a SQL-based mini project developed using MySQL. It helps manage library books, members, book issuing and returning records.
+**Project Type:** DBMS Mini Project  
+**Course:** Bachelor of Computer Applications (BCA)  
+**Database:** MySQL  
+**Database Name:** librarydb  
+**Software:** MySQL Workbench  
 
-## Technologies Used
-- MySQL
-- SQL
-- GitHub
+---
 
-## Database Name
-librarydb
+## 1. Introduction
 
-## Tables Used
+The Library Management System is a mini project developed using MySQL. It is designed to maintain records of library members, available books and book borrowing activities.
 
-1. Members
-2. Books
-3. Issues
+The main objective of this project is to understand how databases work and how SQL queries can be used to retrieve and manage information.
 
-## Table Description
+Using this database, we can identify popular books, check books that have not been returned, calculate late return fines and analyse borrowing activities.
 
-### 1. Members
-Stores member details.
-- member_id
-- member_name
-- member_type
-- joined_date
+## 2. Database Tables
 
-### 2. Books
-Stores book information.
-- book_id
-- title
-- author
-- category
-- price
-- copies_available
+The database consists of three tables.
 
-### 3. Issues
-Stores book issuing and returning details.
-- issue_id
-- member_id
-- book_id
-- issue_date
-- due_date
-- return_date
+### Members
 
+Stores information about students and faculty members.
 
+| Column | Description |
+|---|---|
+| member_id | Primary key |
+| member_name | Name of the member |
+| member_type | Student or Faculty |
+| joined_date | Date of joining |
 
-## Project Features
+### Books
 
-1. Create database and tables.
-2. Insert members and books.
-3. Manage book issue records.
-4. Display all records.
-5. Count total members and books.
-6. Find top 5 borrowed books.
-7. Identify members who never borrowed books.
-8. Display currently issued books.
-9. Calculate late return fines.
-10. Rank members based on borrowing.
-11. Find popular book categories.
-12. Use stored procedures.
-13. Use database triggers.
+Stores information about books available in the library.
 
-## Fine Calculation
+| Column | Description |
+|---|---|
+| book_id | Primary key |
+| title | Book name |
+| author | Author name |
+| category | Book category |
+| price | Price of the book |
+| copies_available | Number of available copies |
 
-Fine = Late Days × ₹2
-
-## SQL Concepts Used
-
-- CREATE DATABASE
-- CREATE TABLE
-- INSERT
-- SELECT
-- UPDATE
-- JOIN
-- GROUP BY
-- ORDER BY
-- COUNT
-- DATEDIFF
-- RANK
-- STORED PROCEDURE
-- TRIGGER
-- FOREIGN KEY
-
-## How to Run
-
-1. Open MySQL Workbench.
-2. Open the library_management.sql file.
-3. Execute the SQL code.
-4. Select the librarydb database.
-5. Run SELECT queries to view the output.
-
-## Expected Records
-
-| Table | Records |
-|---|---:|
-| Members | 12 |
-| Books | 15 |
-| Issues | 32 |
-
-## Conclusion
-
-The Library Management System makes library work easier by maintaining book details, member information and issue records. It reduces manual work and helps calculate fines and generate reports.
-
-## Project Type
-BCA Mini Project
-
-
-
-
-## Issues
+### Issues
 
 Stores information about books borrowed by members.
 
@@ -123,32 +58,130 @@ Stores information about books borrowed by members.
 | due_date | Expected return date |
 | return_date | Actual return date |
 
-## Members
+## 3. Database Relationships
 
-Stores information about library members.
+The database contains two one-to-many relationships.
 
-| Column | Description |
+- One member can have multiple issue records.
+- One book can appear in multiple issue records.
+
+## 4. Sample Data
+
+The following sample records are inserted into the database.
+
+| Table | Total Records |
+|---|---:|
+| Members | 12 |
+| Books | 15 |
+| Issues | 32 |
+
+The database includes both Student and Faculty members, along with books from different categories such as Programming, Database, Networking, Fiction, Science and Mathematics.
+
+## 5. Fine Calculation
+
+The library follows a fine rule of ₹2 for every day a book is returned late.
+
+**Fine = Late Days × ₹2**
+
+- Student borrowing period: 14 days.
+- Faculty borrowing period: 30 days.
+- Books returned after the due date are considered late.
+- Books returned on the due date have no fine.
+- Books with a NULL return date are considered currently issued.
+
+## 6. SQL Concepts Used
+
+The following SQL concepts are used in this project.
+
+1. Database and table creation.
+2. Primary keys and foreign keys.
+3. SELECT and WHERE statements.
+4. Aggregate functions (COUNT, SUM).
+5. JOIN operations.
+6. GROUP BY and ORDER BY.
+7. Subqueries.
+8. Window functions and RANK.
+9. Stored procedures.
+10. Database triggers.
+
+## 7. Project Questions
+
+The project consists of 15 questions divided into four phases.
+
+### Phase 1 - Database Basics
+
+- C1: Draw the Entity Relationship Diagram.
+- C2: Find the total number of members, books and issue records.
+
+### Phase 2 - SQL Queries
+
+- C3: Find the number of titles and available copies in each category.
+- C4: Find the top 5 most borrowed books.
+- C5: Identify members who have never borrowed a book.
+- C6: Display currently issued books with member names and due dates.
+- C7: Find late returns and calculate their fines.
+- C8: Calculate the total fine for each member.
+- C9: Compare borrowing activities between students and faculty.
+- C10: Rank members according to the number of books borrowed.
+- C11: Identify the most popular book category.
+- C12: Find books with zero available copies and pending issues.
+
+### Phase 3 - Database Automation
+
+- C13: Create a stored procedure to display a member's borrowing history.
+- C14: Create a trigger to automatically reduce available copies when a new issue is inserted.
+
+### Phase 4 - Conclusion
+
+- C15: Suggest improvements to library management based on the query results.
+
+## 8. Files Included
+
+| File | Description |
 |---|---|
-| member_id | Primary key |
-| member_name | Name of member |
-| member_type | Student or Faculty |
-| joined_date | Date of joining |
+| schema.sql | Creates the database and tables. |
+| insert_data.sql | Inserts sample records into the database. |
+| queries.sql | Contains SQL queries for C2 to C14. |
+| notes.md | Contains query summaries and explanations. |
+| erd.jpg | Entity Relationship Diagram. |
 
-## Books
+## 9. How to Run the Project
 
-Stores information about library books.
+1. Open MySQL Workbench.
+2. Execute schema.sql to create the database and tables.
+3. Execute insert_data.sql to insert the sample records.
+4. Select the librarydb database.
+5. Execute the queries from queries.sql.
+6. Check the output for each question.
 
-| Column | Description |
-|---|---|
-| book_id | Primary key |
-| title | Book title |
-| author | Book author |
-| category | Book category |
-| price | Book price |
-| copies_available | Available book copies |
-## Conclusion
+To verify the records, run:
 
-The Library Management System makes library work easier by maintaining book details, member information and issue records. It reduces manual work and helps calculate fines and generate reports.
+```sql
+USE librarydb;
 
-## Project Type
-BCA Mini Project
+SELECT COUNT(*) FROM members;
+SELECT COUNT(*) FROM books;
+SELECT COUNT(*) FROM issues;
+```
+
+### Expected Output
+
+- Members: 12
+- Books: 15
+- Issues: 32
+
+## 10. Learning Outcomes
+
+Through this project, I learned how to create and manage relational databases using MySQL.
+
+I gained practical knowledge of SQL queries, joins, aggregate functions, subqueries and window functions. I also learned how stored procedures and triggers can be used to automate database operations.
+
+This project helped me understand how database concepts can be applied to a real-world library management system.
+
+## 11. Conclusion
+
+The Library Management System demonstrates how MySQL can be used to maintain and analyse library records.
+
+The queries help identify popular books, members with pending returns and late return fines.
+
+Overall, this project provides practical knowledge of database management and SQL operations.
