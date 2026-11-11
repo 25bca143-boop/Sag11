@@ -146,3 +146,9 @@ Stores information about library books.
 | category | Book category |
 | price | Book price |
 | copies_available | Available book copies |
+## Conclusion
+
+The Library Management System makes library work easier by maintaining book details, member information and issue records. It reduces manual work and helps calculate fines and generate reports.
+
+## Project Type
+BCA Mini Project
